@@ -1,11 +1,17 @@
 angular.module('video-player')
 
-.controller('AppCtrl', function(youTube){
-	this.videos = window.exampleVideoData;
-	this.currentVideo = this.videos[0];
-	this.setCurrentVideo = (video) => {
-		this.currentVideo = video;
-	}
+.controller('AppCtrl', function(youTube) {
+  this.searchService = youTube;
+  this.searchResults = (data) => {
+    this.videos = data;
+    this.currentVideo = this.videos[0];
+  };
+  // this.videos = window.exampleVideoData;
+  // this.currentVideo = this.video;
+  this.setCurrentVideo = (video) => {
+    this.currentVideo = video;
+  };
+  youTube.search('javascript tutorial', this.searchResults);
 })
 
 .directive('app', function() {
